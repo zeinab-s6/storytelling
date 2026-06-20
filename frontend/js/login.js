@@ -113,7 +113,7 @@
   }
 
   function applyLoginBackground() {
-    var imageUrl = "images/login-bg.png";
+    var imageUrl = "images/login-background.jpg";
     var img = document.getElementById("login-bg-img");
     if (img) {
       img.src = imageUrl;
