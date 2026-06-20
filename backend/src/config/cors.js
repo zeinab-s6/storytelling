@@ -8,11 +8,26 @@ const DEV_ORIGINS = [
   'http://127.0.0.1:5500',
 ];
 
+const PRODUCTION_ORIGINS = [
+  env.FRONTEND_ORIGIN,
+  'https://storytelling-sepia.vercel.app',
+]
+  .flatMap((origin) => String(origin || '').split(','))
+  .map((origin) => origin.trim())
+  .filter(Boolean)
+  .filter((origin, index, all) => all.indexOf(origin) === index);
+
 export function getCorsOptions() {
   if (env.isProduction) {
     return {
-      origin: env.FRONTEND_ORIGIN,
-      methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+      origin(origin, callback) {
+        if (!origin || PRODUCTION_ORIGINS.includes(origin)) {
+          callback(null, true);
+        } else {
+          callback(new Error('CORS: origin مجاز نیست.'));
+        }
+      },
+      methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization'],
     };
   }
@@ -25,7 +40,7 @@ export function getCorsOptions() {
         callback(new Error('CORS: origin مجاز نیست.'));
       }
     },
-    methods: ['GET', 'POST', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   };
 }

@@ -68,7 +68,7 @@
       } catch (err) {
         var msg = "ورود ناموفق بود.";
         if (err.message === "Failed to fetch") {
-          msg = "اتصال به سرور برقرار نشد. بک‌اند را اجرا کن.";
+          msg = "اتصال به سرور برقرار نشد. جزئیات در Console مرورگر.";
         } else if (err.message) {
           msg = err.message;
         }
@@ -101,7 +101,7 @@
       } catch (err) {
         var msg = "ثبت‌نام ناموفق بود.";
         if (err.message === "Failed to fetch") {
-          msg = "اتصال به سرور برقرار نشد. بک‌اند را اجرا کن.";
+          msg = "اتصال به سرور برقرار نشد. جزئیات در Console مرورگر.";
         } else if (err.message) {
           msg = err.message;
         }
