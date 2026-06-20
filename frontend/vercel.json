@@ -11,6 +11,14 @@
     {
       "source": "/onboarding",
       "destination": "/onboarding.html"
+    },
+    {
+      "source": "/home",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/index",
+      "destination": "/index.html"
     }
   ]
 }
