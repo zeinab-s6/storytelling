@@ -1,5 +1,5 @@
 window.STORYTELLING_CONFIG = {
-  API_BASE_URL: window.location.origin || "http://localhost:3000",
+  API_BASE_URL: "https://storytelling-production-d009.up.railway.app",
   // پس‌زمینه صفحه ورود — بعداً تصویر خود را آپلود کن و مسیر را اینجا بگذار:
   // مثال: "assets/login-bg.jpg"
   LOGIN_BG_IMAGE: "images/login-bg.png",
