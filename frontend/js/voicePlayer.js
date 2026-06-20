@@ -100,15 +100,7 @@
     if (bufferCache[url]) return Promise.resolve(bufferCache[url]);
     return fetch(url, { headers: authFetchHeaders() })
       .then(function (res) {
-        if (!res.ok) {
-          return res.text().catch(function () { return ""; }).then(function (body) {
-            var loadError = new Error("بارگذاری فایل صوتی ناموفق بود.");
-            if (window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-              window.StorytellingAPI.logFetchFailure(url, loadError, res, body);
-            }
-            throw loadError;
-          });
-        }
+        if (!res.ok) throw new Error("بارگذاری فایل صوتی ناموفق بود.");
         return res.arrayBuffer();
       })
       .then(function (arrayBuffer) {
@@ -119,12 +111,6 @@
       .then(function (buffer) {
         bufferCache[url] = buffer;
         return buffer;
-      })
-      .catch(function (err) {
-        if (!err.status && window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-          window.StorytellingAPI.logFetchFailure(url, err, null, null);
-        }
-        throw err;
       });
   }
 

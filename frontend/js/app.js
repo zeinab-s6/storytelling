@@ -233,24 +233,11 @@
   }
 
   async function fetchStoryAudioBlob(url) {
-    var response = null;
-    try {
-      response = await fetch(url, { headers: getAuthFetchHeaders() });
-      if (!response.ok) {
-        var errorBody = await response.text().catch(function () { return ""; });
-        var audioError = new Error("بارگذاری فایل صوتی ناموفق بود.");
-        if (window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-          window.StorytellingAPI.logFetchFailure(url, audioError, response, errorBody);
-        }
-        throw audioError;
-      }
-      return response.blob();
-    } catch (err) {
-      if (!response && window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-        window.StorytellingAPI.logFetchFailure(url, err, null, null);
-      }
-      throw err;
+    var response = await fetch(url, { headers: getAuthFetchHeaders() });
+    if (!response.ok) {
+      throw new Error("بارگذاری فایل صوتی ناموفق بود.");
     }
+    return response.blob();
   }
 
   function waitForAudioReady(element) {
@@ -1161,29 +1148,12 @@
   // Future standalone TTS endpoint example:
   // POST /api/tts/generate
   async function generateVoiceFromAPI(text, voice, settings) {
-    var url = `${window.API_BASE_URL}/api/tts/generate`;
-    var response = null;
-    try {
-      response = await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: text, voice: voice, settings: settings }),
-      });
-      if (!response.ok) {
-        var errorBody = await response.text().catch(function () { return ""; });
-        var ttsError = new Error("درخواست TTS ناموفق بود.");
-        if (window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-          window.StorytellingAPI.logFetchFailure(url, ttsError, response, errorBody);
-        }
-        throw ttsError;
-      }
-      return response.json();
-    } catch (err) {
-      if (!response && window.StorytellingAPI && window.StorytellingAPI.logFetchFailure) {
-        window.StorytellingAPI.logFetchFailure(url, err, null, null);
-      }
-      throw err;
-    }
+    var response = await fetch(window.API_BASE_URL + "/api/tts/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: text, voice: voice, settings: settings }),
+    });
+    return response.json();
   }
 
   function buildAudioPayload(voiceOverride) {

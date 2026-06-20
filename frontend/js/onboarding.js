@@ -122,7 +122,7 @@
       } catch (err) {
         var msg = "ذخیره اطلاعات ناموفق بود.";
         if (err.message === "Failed to fetch") {
-          msg = "اتصال به سرور برقرار نشد. جزئیات در Console مرورگر.";
+          msg = "اتصال به سرور برقرار نشد.";
         } else if (err.message) {
           msg = err.message;
         }
