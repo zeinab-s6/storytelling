@@ -129,5 +129,4 @@
   }
 
   applyLoginBackground();
-  window.StorytellingAuth.redirectIfLoggedIn();
 })();
