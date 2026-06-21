@@ -1,7 +1,7 @@
 (function () {
   "use strict";
 
-  var NIGHT_DELAY_MS = 5000;
+  var NIGHT_DELAY_MS = 3000;
   var NIGHT_THEME = "#0a0e18";
   var DAY_THEME = "#87CEEB";
   var LOGIN_MUSIC_VOLUME = 0.55;
