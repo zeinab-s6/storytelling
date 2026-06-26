@@ -804,7 +804,7 @@
       if (hero) hero.classList.add("story-hero--has-story");
     } else {
       titleEl.textContent = "روزت را به قصه تبدیل کن.";
-      if (subEl) subEl.textContent = "وقتی نمی‌دانی چی بگویی، یک قصه کوتاه، امن و آماده اجرا بساز.";
+      if (subEl) subEl.textContent = "وقتی قصه ای برای گفتن نداری با لالابای برای کوچولوت یک قصه تازه بساز.";
       var heroEl = $("#story-hero");
       if (heroEl) heroEl.classList.remove("story-hero--has-story");
     }
